@@ -1,0 +1,1318 @@
+{
+  "info": {
+    "_postman_id": "b5b16e8d-5c23-4f0d-a8c2-9f4837668e50",
+    "name": "Ecom API v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection pour tester l'API Laravel v1 (health, auth)."
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/health",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8001",
+            "path": ["api", "v1", "health"]
+        }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@local.test\",\n  \"password\": \"admin123456\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/auth/login",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","auth","login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Current user",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/user",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","user"]
+        }
+      }
+    },
+    {
+      "name": "Auth - Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/auth/logout",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","auth","logout"]
+        }
+      }
+    },
+    {
+      "name": "Categories - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/categories",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","categories"],
+          "query": [
+            {"key": "only_roots", "value": "true", "disabled": true},
+            {"key": "only_active", "value": "true", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Categories - Show",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/categories/{{category_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","categories","{{category_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Categories - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"New Category\",\n  \"description\": \"Description\",\n  \"is_active\": true,\n  \"position\": 1\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/categories",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","categories"]
+        }
+      }
+    },
+    {
+      "name": "Categories - Update",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Category\",\n  \"is_active\": false\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/categories/{{category_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","categories","{{category_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Categories - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/categories/{{category_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","categories","{{category_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Products - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products"],
+          "query": [
+            {"key": "category_id", "value": "{{category_id}}", "disabled": true},
+            {"key": "type", "value": "simple", "disabled": true},
+            {"key": "stock_status", "value": "in_stock", "disabled": true},
+            {"key": "has_stock", "value": "true", "disabled": true},
+            {"key": "price_min", "value": "0", "disabled": true},
+            {"key": "price_max", "value": "1000", "disabled": true},
+            {"key": "only_active", "value": "true", "disabled": true},
+            {"key": "q", "value": "phone", "disabled": true},
+            {"key": "attributes[color]", "value": "red", "disabled": true},
+            {"key": "sort", "value": "created_at", "disabled": true},
+            {"key": "direction", "value": "desc", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Products - Show",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Products - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category_id\": {{category_id}},\n  \"type\": \"simple\",\n  \"sku\": \"PM-TEST-001\",\n  \"name\": \"New Product\",\n  \"price\": 199.99,\n  \"stock_quantity\": 10,\n  \"stock_status\": \"in_stock\",\n  \"is_active\": true\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products"]
+        }
+      }
+    },
+    {
+      "name": "Products - Update",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Product\",\n  \"price\": 149.99,\n  \"is_active\": false\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Products - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Variants - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants"],
+          "query": [
+            {"key": "only_active", "value": "true", "disabled": true},
+            {"key": "stock_status", "value": "in_stock", "disabled": true},
+            {"key": "has_stock", "value": "true", "disabled": true},
+            {"key": "price_min", "value": "0", "disabled": true},
+            {"key": "price_max", "value": "1000", "disabled": true},
+            {"key": "q", "value": "red", "disabled": true},
+            {"key": "attributes[color]", "value": "red", "disabled": true},
+            {"key": "sort", "value": "name", "disabled": true},
+            {"key": "direction", "value": "asc", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Variants - Show",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants/{{variant_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants","{{variant_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Variants - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"VAR-TEST-001\",\n  \"name\": \"Test Variant\",\n  \"price\": 49.99,\n  \"stock_quantity\": 3,\n  \"stock_status\": \"in_stock\",\n  \"is_active\": true\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants"]
+        }
+      }
+    },
+    {
+      "name": "Variants - Update",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Variant Updated\",\n  \"price\": 39.99,\n  \"is_active\": false\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants/{{variant_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants","{{variant_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Variants - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants/{{variant_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants","{{variant_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Stock - Movements (auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/stock-movements?stockable_type=product&stockable_id={{product_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","stock-movements"],
+          "query": [
+            {"key": "stockable_type", "value": "product"},
+            {"key": "stockable_id", "value": "{{product_id}}"},
+            {"key": "per_page", "value": "15", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Stock - Decrement (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"stockable_type\": \"product\",\n  \"stockable_id\": {{product_id}},\n  \"quantity\": 1,\n  \"reason\": \"sale\",\n  \"description\": \"Postman decrement test\",\n  \"metadata\": {\n    \"source\": \"postman\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/stock/decrement",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","stock","decrement"]
+        }
+      }
+    }
+    ,
+    {
+      "name": "Products - Export (auth, CSV)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "text/csv"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/export?has_stock=true&sort=created_at&direction=desc",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","export"],
+          "query": [
+            {"key": "has_stock", "value": "true", "disabled": true},
+            {"key": "price_min", "value": "0", "disabled": true},
+            {"key": "price_max", "value": "1000", "disabled": true},
+            {"key": "category_id", "value": "{{category_id}}", "disabled": true},
+            {"key": "type", "value": "simple", "disabled": true},
+            {"key": "stock_status", "value": "in_stock", "disabled": true},
+            {"key": "only_active", "value": "true", "disabled": true},
+            {"key": "q", "value": "phone", "disabled": true},
+            {"key": "attributes[color]", "value": "red", "disabled": true},
+            {"key": "sort", "value": "created_at", "disabled": true},
+            {"key": "direction", "value": "desc", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Products - Import (auth, CSV)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {"key": "file", "type": "file", "src": ""},
+            {"key": "dry_run", "value": "true", "type": "text"},
+            {"key": "update_existing", "value": "false", "type": "text"},
+            {"key": "delimiter", "value": ",", "type": "text"}
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/import",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","import"]
+        }
+      }
+    },
+    {
+      "name": "Product Variants - Export (auth, CSV)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "text/csv"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants/export?sort=name&direction=asc",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants","export"],
+          "query": [
+            {"key": "has_stock", "value": "true", "disabled": true},
+            {"key": "price_min", "value": "0", "disabled": true},
+            {"key": "price_max", "value": "1000", "disabled": true},
+            {"key": "stock_status", "value": "in_stock", "disabled": true},
+            {"key": "only_active", "value": "true", "disabled": true},
+            {"key": "q", "value": "red", "disabled": true},
+            {"key": "attributes[color]", "value": "red", "disabled": true},
+            {"key": "sort", "value": "name", "disabled": true},
+            {"key": "direction", "value": "asc", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product Variants - Import (auth, CSV)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {"key": "file", "type": "file", "src": ""},
+            {"key": "dry_run", "value": "true", "type": "text"},
+            {"key": "update_existing", "value": "false", "type": "text"},
+            {"key": "delimiter", "value": ",", "type": "text"}
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products/{{product_id}}/variants/import",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products","{{product_id}}","variants","import"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Get (guest/user)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "X-Cart-Token", "value": "{{cart_token}}", "disabled": true},
+          {"key": "Authorization", "value": "Bearer {{token}}", "disabled": true}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/cart",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","cart"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Add Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "X-Cart-Token", "value": "{{cart_token}}", "disabled": true},
+          {"key": "Authorization", "value": "Bearer {{token}}", "disabled": true}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"purchasable_type\": \"product\",\n  \"purchasable_id\": {{product_id}},\n  \"quantity\": 1\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/cart/items",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","cart","items"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Update Item Quantity",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "X-Cart-Token", "value": "{{cart_token}}", "disabled": true},
+          {"key": "Authorization", "value": "Bearer {{token}}", "disabled": true}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 2\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/cart/items/{{cart_item_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","cart","items","{{cart_item_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Remove Item",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "X-Cart-Token", "value": "{{cart_token}}", "disabled": true},
+          {"key": "Authorization", "value": "Bearer {{token}}", "disabled": true}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/cart/items/{{cart_item_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","cart","items","{{cart_item_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Merge (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"},
+          {"key": "X-Cart-Token", "value": "{{cart_token}}", "disabled": true}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guest_token\": \"{{cart_token}}\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/cart/merge",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","cart","merge"]
+        }
+      }
+    },
+    {
+      "name": "Addresses - List (auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/addresses",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","addresses"],
+          "query": [
+            {"key": "only_default_shipping", "value": "true", "disabled": true},
+            {"key": "only_default_billing", "value": "true", "disabled": true}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Addresses - Show (auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/addresses/{{address_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","addresses","{{address_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Addresses - Create (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"label\": \"Home\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"phone\": \"+33102030405\",\n  \"line1\": \"1 Rue de Test\",\n  \"city\": \"Paris\",\n  \"postal_code\": \"75001\",\n  \"country_code\": \"FR\",\n  \"is_default_shipping\": true,\n  \"is_default_billing\": true\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/addresses",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","addresses"]
+        }
+      }
+    },
+    {
+      "name": "Addresses - Update (auth)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"label\": \"Home Updated\",\n  \"phone\": \"+33111111111\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/addresses/{{address_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","addresses","{{address_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Addresses - Delete (auth)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/addresses/{{address_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","addresses","{{address_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Orders - List (auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Show (auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Create (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shipping_address_id\": {{address_id}},\n  \"billing_address_id\": {{address_id}}\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Get Allowed Transitions (auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}/allowed-transitions",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}","allowed-transitions"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Update Status (auth - admin only)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"processing\",\n  \"reason\": \"Payment confirmed\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}/status",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}","status"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Cancel (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Customer requested cancellation\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}/cancel",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}","cancel"]
+        }
+      }
+    },
+    {
+      "name": "Payments - Create COD (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"provider\": \"cod\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}/payments",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}","payments"]
+        }
+      }
+    },
+    {
+      "name": "Payments - Create Stripe (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"provider\": \"stripe\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}/payments",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}","payments"]
+        }
+      }
+    },
+    {
+      "name": "Payments - Create Fake (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"provider\": \"fake\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/orders/{{order_id}}/payments",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","orders","{{order_id}}","payments"]
+        }
+      }
+    },
+    {
+      "name": "Webhooks - Stripe - payment_intent.succeeded",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Stripe-Signature", "value": "t={{timestamp}},v1={{signature}}", "disabled": true}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"evt_test_{{$randomInt}}\",\n  \"type\": \"payment_intent.succeeded\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"{{payment_provider_reference}}\",\n      \"status\": \"succeeded\"\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/webhooks/stripe",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","webhooks","stripe"]
+        }
+      }
+    },
+    {
+      "name": "Webhooks - Stripe - payment_intent.payment_failed",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Stripe-Signature", "value": "t={{timestamp}},v1={{signature}}", "disabled": true}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"evt_test_{{$randomInt}}\",\n  \"type\": \"payment_intent.payment_failed\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"{{payment_provider_reference}}\",\n      \"status\": \"failed\",\n      \"last_payment_error\": {\n        \"message\": \"Your card was declined\"\n      }\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/webhooks/stripe",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","webhooks","stripe"]
+        }
+      }
+    },
+    {
+      "name": "Shipping - Get Methods",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/shipping/methods",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","shipping","methods"]
+        }
+      }
+    },
+    {
+      "name": "Shipping - Calculate Options",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"country_code\": \"FR\",\n  \"postal_code\": \"75001\",\n  \"state\": \"\",\n  \"cart_total\": 45.00,\n  \"cart_weight\": 2.5\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/shipping/calculate",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","shipping","calculate"]
+        }
+      }
+    },
+    {
+      "name": "Shipping - Calculate Specific Method",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"method_key\": \"standard\",\n  \"zone_key\": \"france_metro\",\n  \"cart_total\": 45.00,\n  \"cart_weight\": 2.5\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/shipping/calculate-method",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","shipping","calculate-method"]
+        }
+      }
+    },
+    {
+      "name": "Coupons - Validate (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"SAVE10\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/coupons/validate",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","coupons","validate"]
+        }
+      }
+    },
+    {
+      "name": "Coupons - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"API-COUPON-{{$randomInt}}\",\n  \"type\": \"fixed\",\n  \"value\": 10,\n  \"min_order_amount\": 0,\n  \"max_discount_amount\": 20,\n  \"usage_limit\": 100,\n  \"usage_limit_per_user\": 1,\n  \"is_active\": true\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/admin/coupons",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","admin","coupons"]
+        }
+      }
+    },
+    {
+      "name": "Promotions - List (public)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/promotions",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","promotions"]
+        }
+      }
+    },
+    {
+      "name": "Promotions - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"API Promotion {{$randomInt}}\",\n  \"type\": \"product\",\n  \"discount_type\": \"percentage\",\n  \"discount_value\": 25,\n  \"applicable_products\": [{{product_id}}],\n  \"priority\": 50,\n  \"is_active\": true\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/admin/promotions",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","admin","promotions"]
+        }
+      }
+    },
+    {
+      "name": "Pages - Public List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/pages",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","pages"]
+        }
+      }
+    },
+    {
+      "name": "Pages - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"FAQ {{$randomInt}}\",\n  \"slug\": \"faq-{{$randomInt}}\",\n  \"content\": \"<p>Contenu généré via Postman</p>\",\n  \"meta_description\": \"FAQ\",\n  \"meta_keywords\": [\"faq\",\"help\"],\n  \"is_published\": true,\n  \"order\": 10\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/admin/pages",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","admin","pages"]
+        }
+      }
+    },
+    {
+      "name": "Blocks - Public List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/blocks",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","blocks"]
+        }
+      }
+    },
+    {
+      "name": "Blocks - Create Slider (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Accept", "value": "application/json"},
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"key\": \"home-slider-{{$randomInt}}\",\n  \"type\": \"slider\",\n  \"title\": \"Homepage Slider\",\n  \"content\": {\n    \"slides\": [\n      {\n        \"image\": \"https://picsum.photos/1200/600\",\n        \"title\": \"Slide 1\",\n        \"link\": \"/products\"\n      }\n    ],\n    \"autoplay\": true,\n    \"interval\": 5000\n  },\n  \"order\": 1,\n  \"is_active\": true\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/admin/blocks",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","admin","blocks"]
+        }
+      }
+    },
+    {
+      "name": "Config - i18n",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Accept", "value": "application/json"}],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/config/i18n",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","config","i18n"]
+        }
+      }
+    },
+    {
+      "name": "Pages - List (lang=en)",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Accept", "value": "application/json"}],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/pages?lang=en",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","pages"],
+          "query": [{"key": "lang", "value": "en"}]
+        }
+      }
+    },
+    {
+      "name": "Products - List (lang=ar)",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Accept", "value": "application/json"}],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/products?lang=ar&per_page=10",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","products"],
+          "query": [
+            {"key": "lang", "value": "ar"},
+            {"key": "per_page", "value": "10"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Promotions - List (lang=en)",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Accept", "value": "application/json"}],
+        "url": {
+          "raw": "http://127.0.0.1:8001/api/v1/promotions?lang=en",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8001",
+          "path": ["api","v1","promotions"],
+          "query": [{"key": "lang", "value": "en"}]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "category_id",
+      "value": "1"
+    },
+    {
+      "key": "product_id",
+      "value": "1"
+    },
+    {
+      "key": "variant_id",
+      "value": "1"
+    },
+    {
+      "key": "stockable_product_id",
+      "value": "1"
+    },
+    {
+      "key": "stockable_variant_id",
+      "value": "1"
+    },
+    {
+      "key": "cart_token",
+      "value": ""
+    },
+    {
+      "key": "cart_item_id",
+      "value": ""
+    },
+    {
+      "key": "address_id",
+      "value": ""
+    },
+    {
+      "key": "order_id",
+      "value": ""
+    },
+    {
+      "key": "payment_provider_reference",
+      "value": "",
+      "description": "Provider reference from payment creation (e.g., pi_xxx for Stripe)"
+    },
+    {
+      "key": "timestamp",
+      "value": "",
+      "description": "Unix timestamp for webhook signature"
+    },
+    {
+      "key": "signature",
+      "value": "",
+      "description": "HMAC signature for webhook verification"
+    }
+  ]
+}
